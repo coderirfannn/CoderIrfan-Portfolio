@@ -32,7 +32,7 @@ import vercelLogo from './assets/tech_logo/vercel.png';
 
 // Project Section Logo's
 import githubdetLogo from './assets/work_logo/javacoder.png';
-import Chatlock from './assets/work_logo/Chatlock.png';
+import Chatlock from "./assets/work_logo/chatlock.png";
 import coolname from './assets/work_logo/coolname.png';
 
 
