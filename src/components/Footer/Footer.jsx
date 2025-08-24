@@ -2,62 +2,58 @@ import React from "react";
 import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Footer = () => {
-  // Smooth scroll function
   const handleScroll = (sectionId) => {
     const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <footer className="text-white py-8 px-[12vw] md:px-[7vw] lg:px-[20vw]">
+    <footer className="text-white py-12 px-[12vw] md:px-[7vw] lg:px-[20vw] bg-[#050414] border-t border-gray-700">
       <div className="container mx-auto text-center">
-        {/* Name / Logo */}
-        <h2 className="text-xl font-semibold text-purple-500">Coder Irfan</h2>
+        {/* Logo / Name */}
+        <h2 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 animate-gradient-x">
+          Coder Irfan
+        </h2>
 
-        {/* Navigation Links - Responsive */}
-        <nav className="flex flex-wrap justify-center space-x-4 sm:space-x-6 mt-4">
+        {/* Navigation Links */}
+        <nav className="flex flex-wrap justify-center space-x-6 mt-6">
           {[
             { name: "About", id: "about" },
             { name: "Skills", id: "skills" },
-            // { name: "Experience", id: "experience" },
             { name: "Projects", id: "projects" },
-            // { name: "Education", id: "education" },
           ].map((item, index) => (
             <button
               key={index}
               onClick={() => handleScroll(item.id)}
-              className="hover:text-purple-500 text-sm sm:text-base my-1"
+              className="text-gray-300 hover:text-purple-500 transition-all duration-300 font-medium text-sm sm:text-base my-1 relative group"
             >
               {item.name}
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 transition-all group-hover:w-full rounded"></span>
             </button>
           ))}
         </nav>
 
-        {/* Social Media Icons - Responsive */}
-        <div className="flex flex-wrap justify-center space-x-4 mt-6">
+        {/* Social Media Icons */}
+        <div className="flex flex-wrap justify-center space-x-6 mt-8">
           {[
-         
             { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/mohd-irfan-78544b280" },
             { icon: <FaInstagram />, link: "https://www.instagram.com/code_with_irfan01" },
             { icon: <FaYoutube />, link: "https://www.youtube.com/@CoderIrfan" },
-            
           ].map((item, index) => (
             <a
               key={index}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl hover:text-purple-500 transition-transform transform hover:scale-110"
+              className="text-2xl sm:text-3xl text-gray-300 hover:text-purple-500 transition-transform transform hover:scale-125"
             >
               {item.icon}
             </a>
           ))}
         </div>
 
-        {/* Copyright Text */}
-        <p className="text-sm text-gray-400 mt-6">
+        {/* Copyright */}
+        <p className="text-sm text-gray-400 mt-8">
           © 2025 Coder Irfan. All rights reserved.
         </p>
       </div>

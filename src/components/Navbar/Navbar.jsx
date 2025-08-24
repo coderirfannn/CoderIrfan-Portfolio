@@ -9,42 +9,35 @@ const Navbar = () => {
 
   // Detect scroll and change navbar background
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll function
   const handleMenuItemClick = (sectionId) => {
     setActiveSection(sectionId);
     setIsOpen(false);
-
     const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
   const menuItems = [
     { id: "about", label: "About" },
     { id: "skills", label: "Skills" },
-    // { id: "experience", label: "Experience" },
     { id: "work", label: "Projects" },
-    // { id: "education", label: "Education" },
   ];
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
-        isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
+        isScrolled
+          ? "bg-[#050414] bg-opacity-70 backdrop-blur-md shadow-xl"
+          : "bg-transparent"
       }`}
     >
       <div className="text-white py-5 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-lg font-semibold cursor-pointer">
+        <div className="text-lg font-bold cursor-pointer select-none">
           <span className="text-[#8245ec]">&lt;</span>
           <span className="text-white">Coder</span>
           <span className="text-[#8245ec]">/</span>
@@ -53,38 +46,40 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 text-gray-300">
+        <ul className="hidden md:flex space-x-10 text-gray-300 font-medium">
           {menuItems.map((item) => (
             <li
               key={item.id}
-              className={`cursor-pointer hover:text-[#8245ec] ${
-                activeSection === item.id ? "text-[#8245ec]" : ""
+              className={`cursor-pointer relative group transition-all duration-300 ${
+                activeSection === item.id ? "text-[#8245ec]" : "hover:text-[#8245ec]"
               }`}
             >
               <button onClick={() => handleMenuItemClick(item.id)}>
                 {item.label}
+                {/* Underline animation */}
+                <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-gradient-to-r from-purple-500 to-pink-500 transition-all group-hover:w-full"></span>
               </button>
             </li>
           ))}
         </ul>
 
         {/* Social Icons */}
-        <div className="hidden md:flex space-x-4">
+        <div className="hidden md:flex space-x-5">
           <a
             href="https://github.com/coderirfannn"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
+            className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 hover:scale-110"
           >
-            <FaGithub size={24} />
+            <FaGithub size={26} />
           </a>
           <a
             href="https://www.linkedin.com/in/mohd-irfan-78544b280"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-300 hover:text-[#8245ec]"
+            className="text-gray-300 hover:text-[#8245ec] transition-colors duration-300 hover:scale-110"
           >
-            <FaLinkedin size={24} />
+            <FaLinkedin size={26} />
           </a>
         </div>
 
@@ -92,12 +87,12 @@ const Navbar = () => {
         <div className="md:hidden">
           {isOpen ? (
             <FiX
-              className="text-3xl text-[#8245ec] cursor-pointer"
+              className="text-3xl text-[#8245ec] cursor-pointer transition-transform duration-300 hover:scale-110"
               onClick={() => setIsOpen(false)}
             />
           ) : (
             <FiMenu
-              className="text-3xl text-[#8245ec] cursor-pointer"
+              className="text-3xl text-[#8245ec] cursor-pointer transition-transform duration-300 hover:scale-110"
               onClick={() => setIsOpen(true)}
             />
           )}
@@ -106,12 +101,12 @@ const Navbar = () => {
 
       {/* Mobile Menu Items */}
       {isOpen && (
-        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-          <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
+        <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-70 backdrop-blur-lg rounded-xl shadow-xl md:hidden animate-fadeIn">
+          <ul className="flex flex-col items-center space-y-6 py-6 text-gray-300 font-medium">
             {menuItems.map((item) => (
               <li
                 key={item.id}
-                className={`cursor-pointer hover:text-white ${
+                className={`cursor-pointer transition-all duration-300 hover:text-[#8245ec] ${
                   activeSection === item.id ? "text-[#8245ec]" : ""
                 }`}
               >
@@ -120,12 +115,12 @@ const Navbar = () => {
                 </button>
               </li>
             ))}
-            <div className="flex space-x-4">
+            <div className="flex space-x-6 pt-4">
               <a
                 href="https://github.com/coderirfannn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-[#8245ec] transition-transform duration-300 hover:scale-110"
               >
                 <FaGithub size={24} />
               </a>
@@ -133,7 +128,7 @@ const Navbar = () => {
                 href="https://www.linkedin.com/in/mohd-irfan-78544b280"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-[#8245ec] transition-transform duration-300 hover:scale-110"
               >
                 <FaLinkedin size={24} />
               </a>
